@@ -158,7 +158,7 @@ require("gitsigns").setup({
 
 require("lualine").setup({
 	options = {
-		disabled_filetypes = { "toggleterm", "terminal", "NvimTree" },
+		globalstatus = true,
 	},
 })
 
