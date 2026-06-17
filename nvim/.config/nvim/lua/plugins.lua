@@ -142,6 +142,7 @@ vim.keymap.set("n", "<leader>ff", "<cmd>FzfLua files<CR>")
 vim.keymap.set("n", "<leader>fg", "<cmd>FzfLua live_grep<CR>")
 vim.keymap.set("n", "<leader>fb", "<cmd>FzfLua lgrep_curbuf<CR>")
 vim.keymap.set("n", "<leader>ca", "<cmd>FzfLua lsp_code_actions<CR>")
+vim.keymap.set("n", "<leader>sd", "<cmd>FzfLua diagnostics_document<CR>")
 
 --------------
 -- gitsigns --
