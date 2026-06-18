@@ -203,7 +203,12 @@ require("mason-tool-installer").setup({
 -- nvim-tree --
 ---------------
 
-require("nvim-tree").setup()
+require("nvim-tree").setup({
+	modified = {
+		enable = true,
+		show_on_open_dirs = false,
+	},
+})
 
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFocus<cr>")
 vim.keymap.set("n", "<leader>E", "<cmd>NvimTreeToggle<cr>")
