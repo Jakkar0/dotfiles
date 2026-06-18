@@ -1,3 +1,4 @@
+vim.opt.autoread = true -- automatically read a file again if it was changed outside of Nvim.
 vim.opt.cursorline = true -- Highlight the text line of the cursor.
 vim.opt.expandtab = true -- In Insert mode: Use the appropriate number of spaces to insert a <Tab>.
 vim.opt.ignorecase = true -- Ignore case in search patterns.
