@@ -1,4 +1,6 @@
 {
         "diagnostics.globals": ["vim"],
-        "workspace.library": "vim.env.VIMRUNTIME"
+        "workspace.library": [
+                "$VIMRUNTIME"
+        ]
 }
