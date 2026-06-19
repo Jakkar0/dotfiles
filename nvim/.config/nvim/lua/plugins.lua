@@ -226,10 +226,14 @@ require("nvim-tree").setup({
 		enable = true,
 		show_on_open_dirs = false,
 	},
+	view = {
+		float = {
+			enable = true,
+		},
+	},
 })
 
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFocus<cr>")
-vim.keymap.set("n", "<leader>E", "<cmd>NvimTreeToggle<cr>")
+vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>")
 
 -----------
 -- noice --
