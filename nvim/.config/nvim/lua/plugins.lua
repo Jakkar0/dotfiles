@@ -62,7 +62,11 @@ require("conform").setup({
 	},
 })
 
-vim.keymap.set("n", "<leader>mp", "<cmd>lua require('conform').format()<CR>")
+vim.keymap.set("n", "<leader>mp", function()
+	if require("conform").format() then
+		vim.notify("Ran format with conform on file")
+	end
+end)
 
 ---------------
 -- blink.cmp --
