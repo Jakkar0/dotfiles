@@ -10,6 +10,8 @@ vim.opt.signcolumn = "yes:1" -- When and how to draw the signcolumn.
 vim.opt.smartindent = true -- Do smart autoindenting when starting a new line.
 vim.opt.splitbelow = true -- Splitting a window will put the new window below the current one.
 vim.opt.splitright = true -- Splitting a window will put the new window right of the current one.
+vim.opt.title = true -- Let Nvim set the title of the terminal window.
+vim.opt.titlestring = "nvim: %{fnamemodify(getcwd(), ':~')}" -- Set tile in terminal
 
 -- disable netrw as recommended by nvimtree
 vim.g.loaded_netrw = 1
