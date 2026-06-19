@@ -270,6 +270,7 @@ end
 
 vim.keymap.set("n", "<leader>tg", "<cmd>ToggleTerm direction=horizontal<CR>")
 vim.keymap.set("n", "<leader>tr", "<cmd>ToggleTerm direction=vertical<CR>")
-vim.keymap.set("n", "<leader>tn", "<cmd>TermNew<CR>")
+vim.keymap.set("n", "<leader>tng", "<cmd>TermNew direction=vertical<CR>")
+vim.keymap.set("n", "<leader>tnr", "<cmd>TermNew direction=horizontal<CR>")
 vim.keymap.set("n", "<leader>tt", "<cmd>lua Floaty_toggle()<CR>")
 vim.keymap.set("n", "<leader>g", "<cmd>lua Lazygit_toggle()<CR>")
