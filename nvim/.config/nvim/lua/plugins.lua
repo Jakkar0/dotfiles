@@ -158,9 +158,22 @@ require("gitsigns").setup({
 -- lualine --
 -------------
 
+local function tmux_status()
+	if vim.env.TMUX then
+		return "tmux: ✓"
+	else
+		return "tmux: ✗"
+	end
+end
+
 require("lualine").setup({
 	options = {
 		globalstatus = true,
+	},
+	sections = {
+		lualine_x = { tmux_status },
+		lualine_y = { "filetype" },
+		lualine_z = { "progress", "location" },
 	},
 })
 
