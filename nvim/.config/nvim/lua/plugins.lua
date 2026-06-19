@@ -231,6 +231,16 @@ require("nvim-tree").setup({
 			enable = true,
 		},
 	},
+	on_attach = function(bufnr)
+		local api = require("nvim-tree.api")
+		local function opts(desc)
+			return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+		end
+
+		api.map.on_attach.default(bufnr)
+
+		vim.keymap.set("n", "<Esc>", api.tree.close, opts("Close"))
+	end,
 })
 
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>")
@@ -259,7 +269,7 @@ require("toggleterm").setup({
 	shade_terminals = false,
 	start_in_insert = false,
 	on_open = function(term)
-                -- fix width/height so neovim doesn't try to auto resize the terminals
+		-- fix width/height so neovim doesn't try to auto resize the terminals
 		if term.direction == "vertical" then
 			vim.wo[term.window].winfixwidth = true
 		elseif term.direction == "horizontal" then
@@ -268,7 +278,7 @@ require("toggleterm").setup({
 			return -- float, nothing to balance
 		end
 
-                -- automatically balance out all other panes when termianal opens
+		-- automatically balance out all other panes when termianal opens
 		vim.cmd("wincmd =")
 	end,
 })
