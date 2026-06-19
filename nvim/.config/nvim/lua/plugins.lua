@@ -219,9 +219,9 @@ require("mason-tool-installer").setup({
 ---------------
 
 require("nvim-tree").setup({
-        filters = {
-                enable = false
-        },
+	filters = {
+		enable = false,
+	},
 	modified = {
 		enable = true,
 		show_on_open_dirs = false,
