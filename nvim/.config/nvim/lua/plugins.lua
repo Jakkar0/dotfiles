@@ -18,6 +18,7 @@ vim.pack.add({
 	{ src = "https://github.com/saghen/blink.indent" },
 	{ src = "https://github.com/saghen/blink.lib" },
 	{ src = "https://github.com/stevearc/conform.nvim" },
+	{ src = "https://github.com/tpope/vim-sleuth" },
 	{ src = "https://github.com/xzbdmw/colorful-menu.nvim" },
 	-- seems broken atm :(
 	--	{ src = "https://github.com/saghen/blink.pairs", version = vim.version.range("*") },
