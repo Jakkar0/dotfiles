@@ -258,6 +258,19 @@ require("toggleterm").setup({
 	end,
 	shade_terminals = false,
 	start_in_insert = false,
+	on_open = function(term)
+                -- fix width/height so neovim doesn't try to auto resize the terminals
+		if term.direction == "vertical" then
+			vim.wo[term.window].winfixwidth = true
+		elseif term.direction == "horizontal" then
+			vim.wo[term.window].winfixheight = true
+		else
+			return -- float, nothing to balance
+		end
+
+                -- automatically balance out all other panes when termianal opens
+		vim.cmd("wincmd =")
+	end,
 })
 
 local Terminal = require("toggleterm.terminal").Terminal
@@ -272,9 +285,39 @@ function Floaty_toggle()
 	floaty:toggle()
 end
 
-vim.keymap.set("n", "<leader>tg", "<cmd>ToggleTerm direction=horizontal<CR>")
-vim.keymap.set("n", "<leader>tr", "<cmd>ToggleTerm direction=vertical<CR>")
-vim.keymap.set("n", "<leader>tng", "<cmd>TermNew direction=vertical<CR>")
-vim.keymap.set("n", "<leader>tnr", "<cmd>TermNew direction=horizontal<CR>")
+-- find the curently open terminal dock if there is any
+local function find_open_dock()
+	for _, term in pairs(require("toggleterm.terminal").get_all(true)) do
+		if term:is_open() and (term.direction == "horizontal" or term.direction == "vertical") then
+			return term
+		end
+	end
+end
+
+-- toggle/open dock, and block if trying to open terminal that's "wrong" for current dock
+local function dock(cmd, direction)
+	local open = find_open_dock()
+	if open and open.direction ~= direction then
+		vim.notify(
+			("A %s terminal dock is open - close it before opening a %s one."):format(open.direction, direction),
+			vim.log.levels.WARN
+		)
+		return
+	end
+	vim.cmd(cmd .. " direction=" .. direction)
+end
+
+vim.keymap.set("n", "<leader>tg", function()
+	dock("ToggleTerm", "horizontal")
+end)
+vim.keymap.set("n", "<leader>tr", function()
+	dock("ToggleTerm", "vertical")
+end)
+vim.keymap.set("n", "<leader>tng", function()
+	dock("TermNew", "horizontal")
+end)
+vim.keymap.set("n", "<leader>tnr", function()
+	dock("TermNew", "vertical")
+end)
 vim.keymap.set("n", "<leader>tt", "<cmd>lua Floaty_toggle()<CR>")
 vim.keymap.set("n", "<leader>g", "<cmd>lua Lazygit_toggle()<CR>")
