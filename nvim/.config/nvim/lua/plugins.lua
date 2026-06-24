@@ -252,6 +252,39 @@ require("nvim-tree").setup({
 
 vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>")
 
+-- auto resize floating nvim-tree window to show the full size of file list and names
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "NvimTree",
+	callback = function(ev)
+		vim.api.nvim_buf_attach(ev.buf, false, {
+			on_lines = function()
+				vim.schedule(function()
+					local win = vim.fn.bufwinid(ev.buf)
+					if win == -1 then
+						return
+					end
+					local lines = vim.api.nvim_buf_get_lines(ev.buf, 0, -1, false)
+					local w = 20
+					for _, l in ipairs(lines) do
+						w = math.max(w, vim.fn.strdisplaywidth(l) + 5)
+					end
+					local h = math.min(#lines, vim.o.lines - 1)
+					local cfg = vim.api.nvim_win_get_config(win)
+					vim.api.nvim_win_set_config(
+						win,
+						vim.tbl_extend("force", cfg, {
+							width = w,
+							height = h,
+							row = 0,
+							col = 0,
+						})
+					)
+				end)
+			end,
+		})
+	end,
+})
+
 -----------
 -- noice --
 -----------
